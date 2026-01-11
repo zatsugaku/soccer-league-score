@@ -421,6 +421,15 @@ header h1 {
     font-size: 0.9rem;
 }
 
+.match-date {
+    font-size: 0.85rem;
+    color: #666;
+    background: #e3f2fd;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
 /* モーダル */
 .modal {
     display: none;
@@ -493,6 +502,28 @@ header h1 {
 
 .close:hover {
     color: #333;
+}
+
+/* 試合日入力 */
+.match-date-input {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.match-date-input label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.match-date-input input[type="date"] {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 200px;
 }
 
 /* スコア入力 */

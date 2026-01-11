@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サッカーリーグ スコア管理</title>
+    <title>サッカー星取表</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>サッカーリーグ スコア管理</h1>
+            <h1>サッカー星取表</h1>
         </header>
 
         <main>
@@ -47,6 +47,10 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h3>スコア入力</h3>
+            <div class="match-date-input">
+                <label for="matchDate">試合日</label>
+                <input type="date" id="matchDate">
+            </div>
             <div class="score-input">
                 <span id="homeTeamName">ホーム</span>
                 <input type="number" id="homeScore" min="0" value="0">

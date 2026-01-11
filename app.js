@@ -262,6 +262,7 @@ class LeagueManager {
         document.getElementById('awayTeamName').textContent = awayTeam ? awayTeam.name : '';
         document.getElementById('homeScore').value = match.homeScore !== null ? match.homeScore : 0;
         document.getElementById('awayScore').value = match.awayScore !== null ? match.awayScore : 0;
+        document.getElementById('matchDate').value = match.date || '';
 
         document.getElementById('scoreModal').classList.add('show');
     }
@@ -272,9 +273,11 @@ class LeagueManager {
 
         const homeScore = parseInt(document.getElementById('homeScore').value) || 0;
         const awayScore = parseInt(document.getElementById('awayScore').value) || 0;
+        const matchDate = document.getElementById('matchDate').value || '';
 
         this.currentMatch.homeScore = homeScore;
         this.currentMatch.awayScore = awayScore;
+        this.currentMatch.date = matchDate;
         this.currentMatch.played = true;
 
         this.currentMatch = null;
@@ -354,6 +357,7 @@ class LeagueManager {
         if (!tournament || !block) return;
 
         const standings = this.calculateStandings(block);
+        const playedMatches = block.matches.filter(m => m.played);
 
         const printWindow = window.open('', '_blank');
         printWindow.document.write(`
@@ -384,6 +388,7 @@ class LeagueManager {
                     table {
                         width: 100%;
                         border-collapse: collapse;
+                        margin-bottom: 30px;
                     }
                     th, td {
                         padding: 12px;
@@ -401,6 +406,15 @@ class LeagueManager {
                     .rank-1 { background: #fff9c4; }
                     .rank-2 { background: #e0e0e0; }
                     .rank-3 { background: #ffe0b2; }
+                    .section-title {
+                        font-size: 1.2rem;
+                        margin: 20px 0 10px;
+                        padding-bottom: 5px;
+                        border-bottom: 2px solid #333;
+                    }
+                    .matches-table td {
+                        padding: 8px 12px;
+                    }
                     .print-date {
                         text-align: right;
                         margin-top: 20px;
@@ -445,6 +459,36 @@ class LeagueManager {
                         `).join('')}
                     </tbody>
                 </table>
+
+                ${playedMatches.length > 0 ? `
+                    <h3 class="section-title">試合結果</h3>
+                    <table class="matches-table">
+                        <thead>
+                            <tr>
+                                <th>日付</th>
+                                <th>ホーム</th>
+                                <th>スコア</th>
+                                <th>アウェイ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${playedMatches.map(match => {
+                                const homeTeam = block.teams.find(t => t.id === match.homeTeamId);
+                                const awayTeam = block.teams.find(t => t.id === match.awayTeamId);
+                                const dateStr = match.date ? new Date(match.date).toLocaleDateString('ja-JP') : '-';
+                                return `
+                                    <tr>
+                                        <td>${dateStr}</td>
+                                        <td>${homeTeam ? homeTeam.name : '?'}</td>
+                                        <td><strong>${match.homeScore} - ${match.awayScore}</strong></td>
+                                        <td>${awayTeam ? awayTeam.name : '?'}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                ` : ''}
+
                 <p class="print-date">印刷日: ${new Date().toLocaleDateString('ja-JP')}</p>
             </body>
             </html>
@@ -687,8 +731,13 @@ class LeagueManager {
                 ? `${match.homeScore} - ${match.awayScore}`
                 : '未入力';
 
+            const dateDisplay = match.date
+                ? this.formatDate(match.date)
+                : '';
+
             return `
                 <div class="match-card ${match.played ? 'played' : ''}" data-match-id="${match.id}">
+                    ${dateDisplay ? `<span class="match-date">${dateDisplay}</span>` : ''}
                     <div class="match-teams">
                         <span class="match-team">${homeTeam ? homeTeam.name : '?'}</span>
                         <span class="match-vs">vs</span>
@@ -698,6 +747,13 @@ class LeagueManager {
                 </div>
             `;
         }).join('');
+    }
+
+    // 日付をフォーマット
+    formatDate(dateStr) {
+        if (!dateStr) return '';
+        const date = new Date(dateStr);
+        return `${date.getMonth() + 1}/${date.getDate()}`;
     }
 }
 
