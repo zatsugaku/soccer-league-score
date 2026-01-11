@@ -1,0 +1,22 @@
+# 環境変数（機密情報）
+.env
+.env.local
+.env.*.local
+
+# 依存関係
+node_modules/
+vendor/
+__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# エディタ
+.vscode/
+.idea/
+*.swp
+
+# ログ
+*.log
+npm-debug.log*

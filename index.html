@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サッカーリーグ スコア管理</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>サッカーリーグ スコア管理</h1>
+        </header>
+
+        <main>
+            <!-- ブロック選択・管理 -->
+            <section class="block-management">
+                <h2>ブロック管理</h2>
+                <div class="block-controls">
+                    <input type="text" id="newBlockName" placeholder="新しいブロック名">
+                    <button id="addBlockBtn">ブロック追加</button>
+                </div>
+                <div class="block-tabs" id="blockTabs">
+                    <!-- ブロックタブがここに追加される -->
+                </div>
+            </section>
+
+            <!-- 現在のブロックの内容 -->
+            <div id="currentBlockContent" class="block-content">
+                <p class="no-block-message">ブロックを追加または選択してください</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- チーム追加モーダル -->
+    <div id="teamModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>チーム追加</h3>
+            <input type="text" id="newTeamName" placeholder="チーム名">
+            <button id="addTeamBtn">追加</button>
+        </div>
+    </div>
+
+    <!-- スコア入力モーダル -->
+    <div id="scoreModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>スコア入力</h3>
+            <div class="score-input">
+                <span id="homeTeamName">ホーム</span>
+                <input type="number" id="homeScore" min="0" value="0">
+                <span>-</span>
+                <input type="number" id="awayScore" min="0" value="0">
+                <span id="awayTeamName">アウェイ</span>
+            </div>
+            <button id="saveScoreBtn">保存</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
