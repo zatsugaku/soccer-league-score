@@ -13,21 +13,21 @@
         </header>
 
         <main>
-            <!-- ブロック選択・管理 -->
-            <section class="block-management">
-                <h2>ブロック管理</h2>
-                <div class="block-controls">
-                    <input type="text" id="newBlockName" placeholder="新しいブロック名">
-                    <button id="addBlockBtn">ブロック追加</button>
+            <!-- 大会管理 -->
+            <section class="tournament-management">
+                <h2>大会管理</h2>
+                <div class="tournament-controls">
+                    <input type="text" id="newTournamentName" placeholder="新しい大会名">
+                    <button id="addTournamentBtn">大会追加</button>
                 </div>
-                <div class="block-tabs" id="blockTabs">
-                    <!-- ブロックタブがここに追加される -->
+                <div class="tournament-tabs" id="tournamentTabs">
+                    <!-- 大会タブがここに追加される -->
                 </div>
             </section>
 
-            <!-- 現在のブロックの内容 -->
-            <div id="currentBlockContent" class="block-content">
-                <p class="no-block-message">ブロックを追加または選択してください</p>
+            <!-- 大会コンテンツ（ブロック管理含む） -->
+            <div id="tournamentContent" class="tournament-content">
+                <p class="no-tournament-message">大会を追加または選択してください</p>
             </div>
         </main>
     </div>

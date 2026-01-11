@@ -20,3 +20,6 @@ Thumbs.db
 # ログ
 *.log
 npm-debug.log*
+
+# Firebase
+.firebase/
